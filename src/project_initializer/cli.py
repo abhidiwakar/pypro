@@ -25,6 +25,7 @@ def main(
             "--version",
             help="Show the installed project-init version.",
             callback=_version_callback,
+            is_eager=True,
         ),
     ] = False,
 ) -> None:
