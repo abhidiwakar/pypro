@@ -61,3 +61,23 @@ def test_validate_pack_conflict():
             },
             explicit_names=["common", "django", "fastapi"],
         )
+
+
+def test_resolve_respects_empty_available_packs():
+    with pytest.raises(PackError, match="Required pack 'common' is not available"):
+        resolve_packs(_config(ProjectType.FASTAPI), available_packs={})
+
+
+def test_resolve_respects_empty_explicit_names():
+    assert resolve_packs(_config(ProjectType.FASTAPI), explicit_names=[]) == []
+
+
+def test_validate_pack_requires_selected_pack():
+    with pytest.raises(PackError, match="requires pack 'missing'"):
+        resolve_packs(
+            _config(ProjectType.FASTAPI),
+            available_packs={
+                "common": PackManifest(name="common", requires=("missing",)),
+            },
+            explicit_names=["common"],
+        )

@@ -62,8 +62,8 @@ def resolve_packs(
     available_packs: dict[str, PackManifest] | None = None,
     explicit_names: list[str] | None = None,
 ) -> list[PackManifest]:
-    pack_map = available_packs or _default_pack_manifest_map()
-    names = explicit_names or _pack_names_for_config(config)
+    pack_map = _default_pack_manifest_map() if available_packs is None else available_packs
+    names = _pack_names_for_config(config) if explicit_names is None else explicit_names
 
     selected = [_require_pack(pack_map, name) for name in names]
     selected_names = {pack.name for pack in selected}

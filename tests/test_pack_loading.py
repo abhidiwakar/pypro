@@ -49,3 +49,36 @@ def test_load_pack_requires_name(tmp_path: Path):
 
     with pytest.raises(PackError, match="missing required field 'name'"):
         load_pack(pack_dir)
+
+
+def test_load_pack_requires_pack_yaml(tmp_path: Path):
+    pack_dir = tmp_path / "missing"
+    pack_dir.mkdir()
+
+    with pytest.raises(PackError, match="missing pack.yaml"):
+        load_pack(pack_dir)
+
+
+def test_load_pack_rejects_invalid_yaml(tmp_path: Path):
+    pack_dir = tmp_path / "broken"
+    pack_dir.mkdir()
+    (pack_dir / "pack.yaml").write_text("name: [broken", encoding="utf-8")
+
+    with pytest.raises(PackError, match="invalid YAML"):
+        load_pack(pack_dir)
+
+
+def test_load_pack_requires_file_source_and_destination(tmp_path: Path):
+    pack_dir = tmp_path / "broken"
+    pack_dir.mkdir()
+    (pack_dir / "pack.yaml").write_text(
+        """
+name: broken
+files:
+  - source: app/main.py.j2
+""".strip(),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(PackError, match="without source and destination"):
+        load_pack(pack_dir)
