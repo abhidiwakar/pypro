@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pypro"
+name = "kraf"
 version = "0.1.0"
 description = "Interactive Python web project initializer for Django, Django REST Framework, and FastAPI."
 readme = "README.md"
@@ -21,7 +21,7 @@ dev = [
 ]
 
 [project.scripts]
-pypro = "project_initializer.cli:app"
+kraf = "project_initializer.cli:app"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

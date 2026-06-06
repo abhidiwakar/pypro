@@ -12,7 +12,7 @@ from project_initializer.renderer import render_project
 from project_initializer.resources import builtin_pack_dirs
 
 app = typer.Typer(
-    name="pypro",
+    name="kraf",
     help="Create production-ready Python web projects from interactive prompts.",
     no_args_is_help=True,
 )
@@ -20,7 +20,7 @@ app = typer.Typer(
 
 def _version_callback(value: bool) -> None:
     if value:
-        typer.echo(f"pypro {__version__}")
+        typer.echo(f"kraf {__version__}")
         raise typer.Exit()
 
 
@@ -30,7 +30,7 @@ def main(
         bool,
         typer.Option(
             "--version",
-            help="Show the installed pypro version.",
+            help="Show the installed kraf version.",
             callback=_version_callback,
             is_eager=True,
         ),

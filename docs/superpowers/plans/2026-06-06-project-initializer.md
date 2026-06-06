@@ -88,7 +88,7 @@ def test_version_command_displays_package_version():
     result = runner.invoke(app, ["--version"])
 
     assert result.exit_code == 0
-    assert "pypro 0.1.0" in result.stdout
+    assert "kraf 0.1.0" in result.stdout
 ```
 
 - [ ] **Step 2: Run the test to verify it fails**
@@ -111,7 +111,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pypro"
+name = "kraf"
 version = "0.1.0"
 description = "Interactive Python web project initializer for Django, Django REST Framework, and FastAPI."
 readme = "README.md"
@@ -129,7 +129,7 @@ dev = [
 ]
 
 [project.scripts]
-pypro = "project_initializer.cli:app"
+kraf = "project_initializer.cli:app"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -157,7 +157,7 @@ include = [
 Create `README.md`:
 
 ````markdown
-# pypro
+# kraf
 
 Interactive Python web project initializer for Django, Django REST Framework, and FastAPI.
 
@@ -187,7 +187,7 @@ import typer
 from project_initializer import __version__
 
 app = typer.Typer(
-    name="pypro",
+    name="kraf",
     help="Create production-ready Python web projects from interactive prompts.",
     no_args_is_help=False,
 )
@@ -195,7 +195,7 @@ app = typer.Typer(
 
 def _version_callback(value: bool) -> None:
     if value:
-        typer.echo(f"pypro {__version__}")
+        typer.echo(f"kraf {__version__}")
         raise typer.Exit()
 
 
@@ -203,7 +203,7 @@ def _version_callback(value: bool) -> None:
 def main(
     version: Annotated[
         bool,
-        typer.Option("--version", help="Show the installed pypro version.", callback=_version_callback),
+        typer.Option("--version", help="Show the installed kraf version.", callback=_version_callback),
     ] = False,
 ) -> None:
     return None
@@ -1346,7 +1346,7 @@ Create `src/project_initializer/packs/common/templates/README.md.j2`:
 ````markdown
 # {{ project.project_name }}
 
-Generated with pypro.
+Generated with kraf.
 
 ## Development
 
@@ -1950,7 +1950,7 @@ from project_initializer.renderer import render_project
 from project_initializer.resources import builtin_pack_dirs
 
 app = typer.Typer(
-    name="pypro",
+    name="kraf",
     help="Create production-ready Python web projects from interactive prompts.",
     invoke_without_command=True,
     no_args_is_help=False,
@@ -1959,7 +1959,7 @@ app = typer.Typer(
 
 def _version_callback(value: bool) -> None:
     if value:
-        typer.echo(f"pypro {__version__}")
+        typer.echo(f"kraf {__version__}")
         raise typer.Exit()
 
 
@@ -1968,7 +1968,7 @@ def main(
     ctx: typer.Context,
     version: Annotated[
         bool,
-        typer.Option("--version", help="Show the installed pypro version.", callback=_version_callback),
+        typer.Option("--version", help="Show the installed kraf version.", callback=_version_callback),
     ] = False,
     target_root: Annotated[
         Path,
@@ -2078,20 +2078,20 @@ Expected: PASS.
 Replace `README.md` with:
 
 ````markdown
-# pypro
+# kraf
 
 Interactive Python web project initializer for Django, Django REST Framework, and FastAPI.
 
 ## Install
 
 ```bash
-pipx install git+https://github.com/abhidiwakar/pypro.git
+pipx install git+https://github.com/abhidiwakar/kraf.git
 ```
 
 ## Usage
 
 ```bash
-pypro init
+kraf init
 ```
 
 The CLI asks for:
@@ -2169,29 +2169,29 @@ python -m pip install build
 python -m build
 ```
 
-Expected: `dist/pypro-0.1.0-py3-none-any.whl` and source distribution are created.
+Expected: `dist/kraf-0.1.0-py3-none-any.whl` and source distribution are created.
 
 - [ ] **Step 2: Install the wheel in a temporary virtual environment**
 
 Run:
 
 ```bash
-python -m venv /tmp/pypro-verify
-/tmp/pypro-verify/bin/pip install dist/pypro-0.1.0-py3-none-any.whl
-/tmp/pypro-verify/bin/pypro --version
+python -m venv /tmp/kraf-verify
+/tmp/kraf-verify/bin/pip install dist/kraf-0.1.0-py3-none-any.whl
+/tmp/kraf-verify/bin/kraf --version
 ```
 
-Expected: `pypro 0.1.0`.
+Expected: `kraf 0.1.0`.
 
 - [ ] **Step 3: Generate a project from the installed command**
 
 Run:
 
 ```bash
-mkdir -p /tmp/pypro-output
-printf "Inventory Service\n3\n2\ny\ny\ny\ny\ny\n" | /tmp/pypro-verify/bin/pypro init --target-root /tmp/pypro-output
-test -f /tmp/pypro-output/inventory-service/app/main.py
-test -f /tmp/pypro-output/inventory-service/alembic.ini
+mkdir -p /tmp/kraf-output
+printf "Inventory Service\n3\n2\ny\ny\ny\ny\ny\n" | /tmp/kraf-verify/bin/kraf init --target-root /tmp/kraf-output
+test -f /tmp/kraf-output/inventory-service/app/main.py
+test -f /tmp/kraf-output/inventory-service/alembic.ini
 ```
 
 Expected: command exits 0 and both generated files exist.

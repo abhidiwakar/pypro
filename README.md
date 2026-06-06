@@ -1,17 +1,17 @@
-# pypro
+# kraf
 
 Interactive Python web project initializer for Django, Django REST Framework, and FastAPI.
 
 ## Install
 
 ```bash
-pipx install git+https://github.com/abhidiwakar/pypro.git
+pipx install git+https://github.com/abhidiwakar/kraf.git
 ```
 
 ## Usage
 
 ```bash
-pypro init
+kraf init
 ```
 
 The CLI asks for:

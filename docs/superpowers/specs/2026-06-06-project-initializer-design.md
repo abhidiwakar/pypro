@@ -4,7 +4,7 @@
 
 Build an installable Python CLI utility that helps developers create production-ready Python web projects without repeatedly assembling the same project structure by hand.
 
-The utility will be installed globally with `pipx` and exposed through the `pypro init` command. It will ask interactive questions, compose compatible template packs, render a new project, and generate a consistent Makefile-based developer workflow.
+The utility will be installed globally with `pipx` and exposed through the `kraf init` command. It will ask interactive questions, compose compatible template packs, render a new project, and generate a consistent Makefile-based developer workflow.
 
 ## Scope
 
@@ -31,13 +31,13 @@ The MVP supports these configurable features:
 The user installs the utility with `pipx`:
 
 ```bash
-pipx install git+https://github.com/abhidiwakar/pypro.git
+pipx install git+https://github.com/abhidiwakar/kraf.git
 ```
 
 Then runs:
 
 ```bash
-pypro init
+kraf init
 ```
 
 The CLI asks focused questions:
